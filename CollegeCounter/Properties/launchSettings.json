@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CollegeCounter": {
+      "commandName": "Project",
+      "commandLineArgs": "JSON"
+    }
+  }
+}
