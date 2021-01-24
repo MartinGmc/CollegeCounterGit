@@ -1,8 +1,5 @@
 ﻿using CollegeCounter.Serializer.Implementation;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -18,7 +15,7 @@ namespace CollegeCounter.Serializer.Interface
         public string SerializeObject(object input)
         {
             XmlSerializer xsSubmit = new XmlSerializer(input.GetType());
-           
+
             var xml = "";
 
             using (var sww = new StringWriter())
@@ -26,7 +23,7 @@ namespace CollegeCounter.Serializer.Interface
                 using (XmlWriter writer = XmlWriter.Create(sww))
                 {
                     xsSubmit.Serialize(writer, input);
-                    xml = sww.ToString(); 
+                    xml = sww.ToString();
                 }
             }
             return xml;

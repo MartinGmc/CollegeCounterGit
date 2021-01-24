@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
 
 namespace CollegeCounter.DataObjects
 {
@@ -8,6 +6,6 @@ namespace CollegeCounter.DataObjects
     {
         public string Name { get; set; }
         public int SucessRate { get; set; }
-       
+
     }
 }

@@ -10,25 +10,25 @@ namespace CollegeCounter.CollegeData.Implementation
 {
     public class FileCollegeDataLoader : ICollegeDataLoader
     {
-        private string fileToLoad;
-        private List<DataReaderError> Errors;
-        private IMySerializer serializer;
+        private string _FileToLoad;
+        private List<DataReaderError> _Errors;
+        private IMySerializer _Serializer;
 
         public FileCollegeDataLoader(string filename, IMySerializer serializer)
         {
-            fileToLoad = filename;
-            Errors = new List<DataReaderError>();
-            this.serializer = serializer;
+            _FileToLoad = filename;
+            _Errors = new List<DataReaderError>();
+            this._Serializer = serializer;
         }
 
         public string GetSerializedErrors()
         {
-            return serializer.SerializeObject(Errors);
+            return _Serializer.SerializeObject(_Errors);
         }
 
         public ICollegeData LoadCollegeData(ICollegeData collegeDataToFill)
         {
-            var lines = File.ReadAllLines(fileToLoad);
+            var lines = File.ReadAllLines(_FileToLoad);
 
             bool isInGroup = false; //switch to define if it is in group
             List<string[]> groupContents = new List<string[]>();
@@ -57,7 +57,7 @@ namespace CollegeCounter.CollegeData.Implementation
                     {
                         groupContents.Add(lineSplitted);
                     }
-                   
+
                 }
             }
             if (isInGroup) // probably no blank line on end of file
@@ -75,7 +75,7 @@ namespace CollegeCounter.CollegeData.Implementation
         private Group LoadGroupFromLines(List<string[]> lines)
         {
             Group newGroup = new Group();
-            
+
             foreach (var line in lines)
             {
                 if (line.Length == 1) // name of group
@@ -88,7 +88,8 @@ namespace CollegeCounter.CollegeData.Implementation
                     {
                         Student newStudent = LoadStudentFromLine(line);
                         newGroup.Students.Add(newStudent);
-                    } catch (Exception ex)
+                    }
+                    catch (Exception ex)
                     {
                         StringBuilder lineBuilder = new StringBuilder();
                         foreach (var item in line)
@@ -104,7 +105,7 @@ namespace CollegeCounter.CollegeData.Implementation
                             GroupName = newGroup.Name,
                             LineFaulting = lineBuilder.ToString()
                         };
-                        Errors.Add(error);
+                        _Errors.Add(error);
 
                     }
                 }
@@ -133,11 +134,14 @@ namespace CollegeCounter.CollegeData.Implementation
             {
                 NewSubject.Name = splitted[0];
                 int sucessrate = int.Parse(splitted[1]);
-                if (sucessrate < 0 || sucessrate > 100) throw new Exception($"Sucess rate ({sucessrate}) out of range (0 - 100)");
+                if (sucessrate < 0 || sucessrate > 100)
+                {
+                    throw new Exception($"Sucess rate ({sucessrate}) out of range (0 - 100)");
+                }
                 NewSubject.SucessRate = sucessrate;
             }
             return NewSubject;
-            
+
         }
     }
 }

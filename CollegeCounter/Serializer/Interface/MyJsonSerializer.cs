@@ -1,7 +1,4 @@
 ﻿using CollegeCounter.Serializer.Implementation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 
 namespace CollegeCounter.Serializer.Interface

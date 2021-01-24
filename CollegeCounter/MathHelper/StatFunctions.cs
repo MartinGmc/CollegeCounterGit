@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+
 
 namespace CollegeCounter.MathHelper
 {
@@ -52,15 +52,15 @@ namespace CollegeCounter.MathHelper
             if (values.Length % 2 == 0)
             {
                 int index1 = (values.Count() / 2);
-                
-                double result = (double)(values[index1 - 1] + values[index1] ) / 2;
+
+                double result = (double)(values[index1 - 1] + values[index1]) / 2;
                 return result;
 
             }
             else
             {
-                int index = (int) Math.Ceiling((double)values.Count() / 2);
-                return values[index-1];
+                int index = (int)Math.Ceiling((double)values.Count() / 2);
+                return values[index - 1];
             }
         }
 
